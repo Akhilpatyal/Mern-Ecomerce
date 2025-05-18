@@ -12,7 +12,7 @@ export const fetchUsers = createAsyncThunk(
                       },
                 }
             );
-            return response.data;
+            return response.data;   
         
     }
 )

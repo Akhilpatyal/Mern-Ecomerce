@@ -11,7 +11,7 @@ const Login = () => {
     const dispatch=useDispatch();
     const navigate=useNavigate();
     const location=useLocation();
-    const {user,guestId}=useSelector((state)=>state.auth);
+    const {user,guestId,loading}=useSelector((state)=>state.auth);
     const {cart}=useSelector((state)=>state.cart);
 
 // get redirect parameter and check if it is chekout or something
@@ -56,7 +56,7 @@ useEffect(()=>{
                 <label className="block text-sm font-semibold mb-2"> Password</label>
                 <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} className="w-full p-2 border rounded" placeholder="Enter your Password" />
             </div>
-            <button type="submit" className="w-full bg-black text-white p-2 rounded-lg font-semibold hover:bg-gray-800 transition"> Sign In</button>
+            <button type="submit" className="w-full bg-black text-white p-2 rounded-lg font-semibold hover:bg-gray-800 transition"> {loading ? "loading...": "Sign In"}</button>
             <p className="mt-6 text-center text-sm">
                 Dont have an account ? 
                 <Link to={`/register?redirect=${encodeURIComponent(redirect)}`} className="text-blue-600 hover:text-blue-800 transition"> Register </Link>

@@ -14,7 +14,7 @@ const UserManagement = () => {
     if(user && user.role!=="admin"){
       navigate("/");
     }
-  },[navigate,user]);
+  },[user,navigate]);
   useEffect(()=>{
     if(user && user.role==="admin"){
       dispatch(fetchUsers());

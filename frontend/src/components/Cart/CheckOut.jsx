@@ -32,7 +32,7 @@ const CheckOut = () => {
     e.preventDefault();
     
     if (cart && cart.products.length > 0) {
-     const res= dispatch(createCheckOut({
+     const res= await dispatch(createCheckOut({
       checkoutItems: cart.products,
       shippingAddress: ShippingAdd,
       paymentMethod: "paypal",
@@ -53,7 +53,7 @@ const CheckOut = () => {
         },
       }
     );
-  
+   console.log(response);
       await handleFinalizeCheckout(checkoutId);//if payment is successful
    
    } catch (error) {
@@ -70,6 +70,7 @@ const CheckOut = () => {
           Authorization:`Bearer ${localStorage.getItem("userToken")}`,
         },
       });
+      console.log(response);
       
         navigate("/order-confirmation");
          
@@ -250,11 +251,11 @@ const CheckOut = () => {
       </div>
       {/* Right Side */}
       <div className="bg-gray-50 p-6 rounded-lg">
-        <h3 className="text-lg mb-4">Order Summery</h3>
+        <h3 className="text-lg mb-4">Order Summary</h3>
         <div className="border-t py-4 mb-4">
-          {cart.products.map((product, index) => (
+          {cart.products.map((product) => (
             <div
-              key={index}
+              key={product._id}
               className="flex items-start justify-between py-2 border-b"
             >
               <div className="flex items-start">
@@ -281,7 +282,7 @@ const CheckOut = () => {
           <p>Shipping</p>
           <p>Free</p>
         </div>
-        <div className="flex justify-between items-center text-lg mt-4 boder-t pt-4">
+        <div className="flex justify-between items-center text-lg mt-4 border-t pt-4">
           <p>Total</p>
           <p>${cart.totalPrice?.toLocaleString()}</p>
         </div>

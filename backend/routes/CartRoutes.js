@@ -68,7 +68,9 @@ router.post("/", async (req, res) => {
           {
             productId,
             name: product.name,
-            image: product.images[1].url,
+            // image: product.images[1].url,
+            image: product.images?.[1]?.url || product.images?.[0]?.url || "",
+
             price: product.price,
             quantity,
             size,

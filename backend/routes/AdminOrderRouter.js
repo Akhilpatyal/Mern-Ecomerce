@@ -21,12 +21,15 @@ router.get("/", protect, admin, async (req, res) => {
 router.put("/:id", protect, admin, async (req, res) => {
   try {
     const order = await Order.findById(req.params.id).populate("user","name");
+     if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
     if (order) {
       order.status = req.body.status || order.status;
       order.isDelivered =
         req.body.status === "Delivered" ? true : order.isDelivered;
       (order.isDeliveredAt = req.body.status) === "Delivered"
-        ? Date.now()
+        ? new Date()
         : order.isDeliveredAt;
 
       const updateOrder = await order.save();

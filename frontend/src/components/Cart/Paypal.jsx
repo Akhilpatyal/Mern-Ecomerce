@@ -2,6 +2,7 @@ import {
   PayPalButtons ,
   PayPalScriptProvider,
 } from "@paypal/react-paypal-js";
+import PropTypes from "prop-types";
 
 const Paypal = ( {amount,onSuccess,onError}) => {
   return (
@@ -27,6 +28,13 @@ const Paypal = ( {amount,onSuccess,onError}) => {
 
     </PayPalScriptProvider>
   );
+};
+
+
+Paypal.propTypes = {
+  amount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  onSuccess: PropTypes.func.isRequired,
+  onError: PropTypes.func.isRequired,
 };
 
 export default Paypal;

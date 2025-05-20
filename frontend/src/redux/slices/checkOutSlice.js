@@ -39,7 +39,7 @@ const checkOutSlice=createSlice({
         })
         .addCase(createCheckOut.rejected,(state,action)=>{
             state.loading=false;
-            state.error=action.payload.message;
+            state.error=action.payload;
         });
     },
 });

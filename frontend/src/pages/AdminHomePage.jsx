@@ -37,7 +37,7 @@ const AdminHomePage = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div className="p-4 shadow-md rounded-lg">
           <h2 className="text-xl font-semibold">Revenue</h2>
-          <p className="text-2xl">${totalSales.toFixed(2)}</p>
+          <p className="text-2xl">${(totalSales || 0).toFixed(2)}</p>
         </div>
         <div className="p-4 shadow-md rounded-lg">
           <h2 className="text-xl font-semibold">Total Orders</h2>
@@ -72,11 +72,11 @@ const AdminHomePage = () => {
               {orders.length > 0 ? (
                 orders.map((order) => (
                   <tr
-                    key={order.id}
+                    key={order._id}
                     className="border-0 hover:bg-gray-50 cursor-pointer"
                   >
-                    <td className="p-4">{order.id}</td>
-                    <td className="p-4">{order.user.name}</td>
+                    <td className="p-4">{order._id}</td>
+                    <td className="p-4">{order.user?.name}</td>
                     <td className="p-4">{order.totalPrice.toFixed(2)}</td>
                     <td className="p-4">{order.status}</td>
                   </tr>

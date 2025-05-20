@@ -48,9 +48,11 @@ router.put("/:id", protect, admin, async (req, res) => {
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
       user.role = req.body.role || user.role;
+      const updateUser = await user.save();
+      res.json({ message: "User updated", updateUser });
+    }else{
+      return res.status(404).json({message:"User Not Found"});
     }
-    const updateUser = await user.save();
-    res.json({ message: "User updated", updateUser });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });

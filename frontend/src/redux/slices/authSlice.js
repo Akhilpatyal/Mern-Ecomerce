@@ -19,7 +19,7 @@ const initialState = {
   error: null,
 };
 
-// asunc thunk to login user
+// async thunk to login user
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (userData, { rejectWithValue }) => {
@@ -84,7 +84,7 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload.message;
+        state.error = action.payload;
       })
       .addCase(registerUser.pending, (state) => {
         state.loading = true;

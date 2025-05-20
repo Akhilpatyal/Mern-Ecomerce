@@ -93,8 +93,10 @@ const adminOrderSlice = createSlice({
       })
       .addCase(fetchAllrOrders.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload.message;
+        // state.error = action.payload.message;
+        state.error = action.payload?.message || "Failed to fetch orders.";
       })
+
       //   your order status
 
       .addCase(updateOrderStatus.fulfilled, (state, action) => {
@@ -103,14 +105,15 @@ const adminOrderSlice = createSlice({
           (order) => order._id === updateOrder._id
         );
         if (orderIndex > -1) {
-          state.orders[orderIndex].status = updateOrder;
+          state.orders[orderIndex].status = updateOrder.status;
         }
       })
+        
 
       //   delete order
       .addCase(deleteOrder.fulfilled, (state, action) => {
         state.orders = state.orders.filter(
-          (order) => order._id !== action.payload
+          (order) => order._id != action.payload
         );
       });
   },
